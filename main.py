@@ -14,18 +14,21 @@ class MainWindow(QMainWindow):
         monthly_row = QHBoxLayout()
         label_monthly = QLabel("Monthly contrib: ")
         self.input_monthly = QLineEdit("2000")
+        self.input_monthly.returnPressed.connect(self.calculate)
         monthly_row.addWidget(label_monthly)
         monthly_row.addWidget(self.input_monthly)
 
         rate_row = QHBoxLayout()
         label_rate = QLabel("Rate: ")
-        self.input_rate = QLineEdit("4")
+        self.input_rate = QLineEdit("5")
+        self.input_rate.returnPressed.connect(self.calculate)
         rate_row.addWidget(label_rate)
         rate_row.addWidget(self.input_rate)
 
         years_row = QHBoxLayout()
         label_years = QLabel("Years: ")
         self.input_years = QLineEdit("25")
+        self.input_years.returnPressed.connect(self.calculate)
         years_row.addWidget(label_years)
         years_row.addWidget(self.input_years)
 
@@ -45,15 +48,13 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(container)
 
     def calculate(self):
-
         monthly = int(self.input_monthly.text())
         annual = 12 * monthly
-        rate = float(self.input_rate.text()) / 100
         years = int(self.input_years.text())
-        final = 0
-        for i in range(years):
-            final += annual
-            final *= (1 + rate)
+        annual_rate = float(self.input_rate.text()) / 100
+
+        # formula from https://www.wallstreetiswaiting.com/running-the-numbers-1/calculating-interest-recurring-payments/
+        final = annual * ((1 + annual_rate) ** years - 1) / annual_rate
 
         final_str = "{:,.0f}".format(final)
         self.label.setText(f"${final_str}")
