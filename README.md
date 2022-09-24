@@ -5,6 +5,8 @@ Financial Independence and Early Retirement Apps.
 The main application calculates the return from monthly savings over a given 
 number of years and a given annual rate.
 
+![fire app screenshot](docs/files/fire.png)
+
 ## Usage
 
 To install requirements run:
