@@ -18,6 +18,7 @@ To run the program:
 `$ python main.py`
 
 You can also install a Windows executable, available in the release files.
+Or following this [link](https://github.com/HenrYxZ/fire/releases/download/v1.0.0/fire.exe)
 
 
 ## Dependencies
